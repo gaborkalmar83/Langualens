@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -23,7 +25,7 @@ android {
     // the debug signing key so `assembleRelease` still works for a plain checkout.
     val keystoreFile = file(System.getenv("KEYSTORE_FILE") ?: "langualens-release.jks")
     val keystoreProps = rootProject.file("keystore.properties").let { f ->
-        java.util.Properties().apply { if (f.exists()) f.inputStream().use { load(it) } }
+        Properties().apply { if (f.exists()) f.inputStream().use { load(it) } }
     }
     fun secret(env: String, prop: String): String? =
         System.getenv(env) ?: keystoreProps.getProperty(prop)
