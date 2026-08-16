@@ -254,6 +254,23 @@ come from the Web Store. Nothing about the extension needs it beyond installatio
 The options in the popup mirror the app: per-sentence mode, hide-until-clicked,
 automatic translation of selections, and automatic translation of every page.
 
+### Pages already in your target language
+
+If you are learning Dutch and read with **From: Dutch, To: English**, an English
+page is the one you want turned *into* Dutch — leaving it alone would be useless.
+So when a page is already written in the To language, LanguaLens flips the pair for
+that page and tells you it did, in a small notice at the bottom.
+
+It decides from the page's own `lang` attribute, falling back to Chrome's on-device
+language detector when the page does not declare one. The flip applies to the whole
+page, to selections and to what gets saved, so a word saved from an English page is
+stored as English to Dutch.
+
+This is the **Flip the direction on pages already in the To language** checkbox, on
+by default. Turn it off to always translate in one fixed direction. Note that with
+it on, both directions get used, so Chrome downloads two models rather than one —
+the popup says so and the Download button fetches both.
+
 ### Permissions the extension asks for, and why
 
 | Permission | Why |
