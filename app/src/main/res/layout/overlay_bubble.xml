@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:importantForAccessibility="noHideDescendants">
+
+    <TextView
+        android:id="@+id/bubbleLabel"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:background="@drawable/bubble_bg"
+        android:gravity="center"
+        android:text="NL"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp" />
+</FrameLayout>

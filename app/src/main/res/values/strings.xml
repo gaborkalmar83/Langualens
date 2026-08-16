@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">LinguaLens</string>
+    <string name="reader_title">LinguaLens Reader</string>
+    <string name="process_text_label">LinguaLens: vertaal</string>
+    <string name="accessibility_label">LinguaLens screen reader</string>
+    <string name="accessibility_description">Lets LinguaLens read the Dutch text shown on screen so it can show English translations in the floating panel. Text is translated on-device and never uploaded.</string>
+    <string name="bubble_channel">LinguaLens bubble</string>
+</resources>
