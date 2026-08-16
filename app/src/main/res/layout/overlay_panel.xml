@@ -21,7 +21,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Scherm vertaald"
             android:textColor="#E7EDF8"
             android:textSize="15sp"
             android:textStyle="bold" />
@@ -33,7 +32,7 @@
             android:layout_height="wrap_content"
             android:textColor="#7FB2FF"
             android:textSize="12sp"
-            android:text="VERNIEUW" />
+            android:text="@string/refresh" />
 
         <Button
             android:id="@+id/btnClose"
@@ -42,7 +41,7 @@
             android:layout_height="wrap_content"
             android:textColor="#7FB2FF"
             android:textSize="12sp"
-            android:text="SLUIT" />
+            android:text="@string/close" />
     </LinearLayout>
 
     <ScrollView
@@ -69,5 +68,5 @@
         android:paddingBottom="12dp"
         android:textColor="#8894AC"
         android:textSize="11sp"
-        android:text="Tik op een regel om te bewaren voor Anki" />
+        android:text="@string/tap_row_hint" />
 </LinearLayout>

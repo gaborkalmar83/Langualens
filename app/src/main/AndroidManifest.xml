@@ -18,14 +18,14 @@
     </queries>
 
     <application
-        android:name=".LinguaLensApp"
+        android:name=".LanguaLensApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
-        android:theme="@style/Theme.LinguaLens"
+        android:theme="@style/Theme.LanguaLens"
         tools:targetApi="34">
 
         <property
@@ -67,7 +67,7 @@
             android:exported="true"
             android:label="@string/process_text_label"
             android:excludeFromRecents="true"
-            android:theme="@style/Theme.LinguaLens.Transparent">
+            android:theme="@style/Theme.LanguaLens.Transparent">
             <intent-filter>
                 <action android:name="android.intent.action.PROCESS_TEXT" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -95,7 +95,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.lingualens.app.fileprovider"
+            android:authorities="com.langualens.app.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

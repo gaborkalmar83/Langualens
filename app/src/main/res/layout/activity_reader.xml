@@ -24,7 +24,7 @@
             android:ellipsize="end"
             android:textColor="#E7EDF8"
             android:textSize="14sp"
-            android:text="LinguaLens" />
+            android:text="@string/app_name" />
 
         <Button
             android:id="@+id/btnMode"
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:textColor="#7FB2FF"
             android:textSize="12sp"
-            android:text="ZIN" />
+            android:text="@string/reader_mode_paragraph" />
 
         <Button
             android:id="@+id/btnVeil"
@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:textColor="#7FB2FF"
             android:textSize="12sp"
-            android:text="TOON" />
+            android:text="@string/reader_show" />
 
         <Button
             android:id="@+id/btnTranslate"
@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:textColor="#7FB2FF"
             android:textSize="12sp"
-            android:text="VERTAAL" />
+            android:text="@string/reader_translate" />
     </LinearLayout>
 
     <WebView

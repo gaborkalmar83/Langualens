@@ -11,14 +11,13 @@
         android:padding="18dp">
 
         <TextView
-            android:id="@+id/dutch"
+            android:id="@+id/sourceText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#FFFFFF"
             android:textSize="17sp"
             android:textIsSelectable="true"
-            android:lineSpacingMultiplier="1.15"
-            android:text="" />
+            android:lineSpacingMultiplier="1.15" />
 
         <View
             android:layout_width="match_parent"
@@ -28,7 +27,7 @@
             android:background="#33FFFFFF" />
 
         <TextView
-            android:id="@+id/english"
+            android:id="@+id/targetText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#7FB2FF"
@@ -36,7 +35,7 @@
             android:textStyle="italic"
             android:textIsSelectable="true"
             android:lineSpacingMultiplier="1.15"
-            android:text="…" />
+            android:text="@string/translating" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -50,7 +49,7 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:textSize="13sp"
-                android:text="Bewaar" />
+                android:text="@string/save" />
 
             <Button
                 android:id="@+id/btnSpeak"
@@ -58,7 +57,7 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:textSize="13sp"
-                android:text="Spreek" />
+                android:text="@string/speak" />
 
             <Button
                 android:id="@+id/btnReader"
@@ -66,7 +65,7 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:textSize="13sp"
-                android:text="Lees" />
+                android:text="@string/read" />
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

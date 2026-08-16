@@ -5,24 +5,39 @@ plugins {
 }
 
 android {
-    namespace = "com.lingualens.app"
+    namespace = "com.langualens.app"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.lingualens.app"
+        applicationId = "com.langualens.app"
         minSdk = 26
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 2
+        versionName = "2.0"
         vectorDrawables { useSupportLibrary = true }
     }
 
+    // The keystore is never committed. Locally it sits at app/langualens-release.jks
+    // with its passwords in a gitignored keystore.properties; in CI both come from
+    // GitHub Actions secrets. If neither is present the release build falls back to
+    // the debug signing key so `assembleRelease` still works for a plain checkout.
+    val keystoreFile = file(System.getenv("KEYSTORE_FILE") ?: "langualens-release.jks")
+    val keystoreProps = rootProject.file("keystore.properties").let { f ->
+        java.util.Properties().apply { if (f.exists()) f.inputStream().use { load(it) } }
+    }
+    fun secret(env: String, prop: String): String? =
+        System.getenv(env) ?: keystoreProps.getProperty(prop)
+
+    val hasReleaseKey = keystoreFile.exists() && secret("KEYSTORE_PASSWORD", "storePassword") != null
+
     signingConfigs {
-        create("release") {
-            storeFile = file("lingualens-release.jks")
-            storePassword = "tolkapp2026"
-            keyAlias = "tolk"
-            keyPassword = "tolkapp2026"
+        if (hasReleaseKey) {
+            create("release") {
+                storeFile = keystoreFile
+                storePassword = secret("KEYSTORE_PASSWORD", "storePassword")
+                keyAlias = secret("KEY_ALIAS", "keyAlias") ?: "tolk"
+                keyPassword = secret("KEY_PASSWORD", "keyPassword")
+            }
         }
     }
 
@@ -30,11 +45,12 @@ android {
         release {
             isMinifyEnabled = false
             isShrinkResources = false
-            signingConfig = signingConfigs.getByName("release")
+            signingConfig = if (hasReleaseKey) {
+                signingConfigs.getByName("release")
+            } else {
+                signingConfigs.getByName("debug")
+            }
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-        }
-        debug {
-            signingConfig = signingConfigs.getByName("release")
         }
     }
 

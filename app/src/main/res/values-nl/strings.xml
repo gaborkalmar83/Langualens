@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">LanguaLens</string>
+    <string name="reader_title">LanguaLens Reader</string>
+    <string name="process_text_label">LanguaLens</string>
+    <string name="accessibility_label">LanguaLens schermlezer</string>
+    <string name="accessibility_description">Laat LanguaLens de tekst op het scherm lezen, zodat vertalingen in het zwevende paneel getoond kunnen worden. Tekst wordt op het apparaat zelf vertaald en wordt nooit geüpload.</string>
+
+    <!-- navigation -->
+    <string name="tab_read">Lezen</string>
+    <string name="tab_words">Woorden</string>
+    <string name="tab_practice">Oefenen</string>
+    <string name="tab_settings">Instellingen</string>
+
+    <!-- read screen -->
+    <string name="read_subtitle">Lees in de ene taal met de andere eronder.</string>
+    <string name="from_language">Van</string>
+    <string name="to_language">Naar</string>
+    <string name="swap_languages">Wisselen</string>
+    <string name="model_missing_title">Offlinemodel nog niet gedownload</string>
+    <string name="model_missing_body">Ongeveer 30 MB per taal. Na het downloaden werkt vertalen zonder internet.</string>
+    <string name="download_model">Model downloaden</string>
+    <string name="working">Bezig…</string>
+    <string name="model_ready">Model gereed</string>
+    <string name="url_label">Artikellink</string>
+    <string name="open_reader">Openen in tweetalige lezer</string>
+    <string name="paste_label">Of plak hier tekst</string>
+    <string name="read_this_text">Deze tekst lezen</string>
+    <string name="translate_anywhere">Overal vertalen</string>
+    <string name="howto_body">1. Selecteer tekst in Chrome, Discord of WhatsApp en kies LanguaLens in het menu.\n2. Of zet de zwevende knop aan en tik erop om het hele scherm te vertalen.</string>
+    <string name="perm_overlay">Over andere apps tekenen</string>
+    <string name="perm_accessibility">Toegankelijkheid: LanguaLens schermlezer</string>
+    <string name="turn_on">Inschakelen</string>
+    <string name="bubble_on">Knop aan</string>
+    <string name="bubble_off">Knop uit</string>
+
+    <!-- words screen -->
+    <string name="search_hint">Zoeken (%1$d opgeslagen)</string>
+    <string name="speak">Uitspreken</string>
+    <string name="delete">Verwijderen</string>
+    <string name="nothing_saved">Nog niets opgeslagen</string>
+
+    <!-- practice screen -->
+    <string name="practice_title">Oefenen</string>
+    <string name="loading">Laden…</string>
+    <string name="nothing_due">Er is nu niets om te herhalen.</string>
+    <string name="reload">Opnieuw laden</string>
+    <string name="show_answer">Antwoord tonen</string>
+    <string name="grade_again">Opnieuw</string>
+    <string name="grade_hard">Moeilijk</string>
+    <string name="grade_good">Goed</string>
+    <string name="grade_easy">Makkelijk</string>
+    <string name="card_progress">%1$d / %2$d</string>
+
+    <!-- settings screen -->
+    <string name="settings_title">Instellingen</string>
+    <string name="section_reading">Lezen</string>
+    <string name="mode_paragraph">Per alinea vertalen (uit = per zin)</string>
+    <string name="hide_translation">Vertaling verbergen tot je erop tikt</string>
+    <string name="auto_translate">Automatisch vertalen zodra een pagina opent</string>
+    <string name="interface_language">App-taal</string>
+    <string name="section_anki">Anki</string>
+    <string name="anki_found">AnkiDroid gevonden op dit apparaat.</string>
+    <string name="anki_missing">AnkiDroid niet gevonden. Exporteren naar een bestand werkt nog steeds.</string>
+    <string name="anki_deck">Stapel</string>
+    <string name="anki_model">Notitietype (meestal Basic)</string>
+    <string name="anki_auto_push">Nieuwe items direct naar AnkiDroid sturen</string>
+    <string name="anki_push">Naar Anki sturen</string>
+    <string name="export">Exporteren</string>
+    <string name="section_models">Offlinemodellen</string>
+    <string name="download">Downloaden</string>
+    <string name="remove">Verwijderen</string>
+    <string name="downloaded_models">Gedownload: %1$s</string>
+    <string name="none">geen</string>
+
+    <!-- reader toolbar -->
+    <string name="reader_mode_paragraph">ALINEA</string>
+    <string name="reader_mode_sentence">ZIN</string>
+    <string name="reader_show">TOON</string>
+    <string name="reader_hidden">VERBORGEN</string>
+    <string name="reader_translate">VERTAAL</string>
+    <string name="reader_tap_hint">tik om te tonen</string>
+    <string name="reader_placeholder">Plak een tekst of open een link met LanguaLens.</string>
+    <string name="reader_missing_script">reader.js ontbreekt</string>
+    <string name="text_label">Tekst</string>
+
+    <!-- quick popup -->
+    <string name="translating">Vertalen…</string>
+    <string name="save">Opslaan</string>
+    <string name="read">Lezen</string>
+    <string name="no_translation">Geen vertaling. Open LanguaLens en download het offlinemodel.</string>
+
+    <!-- bubble panel -->
+    <string name="bubble_channel">LanguaLens-bubbel</string>
+    <string name="bubble_running">Zwevende vertaalknop is actief</string>
+    <string name="stop">Stoppen</string>
+    <string name="screen_translated">Scherm vertaald (%1$d)</string>
+    <string name="refresh">Vernieuwen</string>
+    <string name="close">Sluiten</string>
+    <string name="tap_row_hint">Tik op een regel om die voor Anki op te slaan</string>
+    <string name="no_text_found">Geen tekst op het scherm gevonden</string>
+    <string name="enable_accessibility_first">Schakel eerst de LanguaLens-schermlezer in bij Toegankelijkheid</string>
+    <string name="overlay_missing">Toestemming om over andere apps te tekenen ontbreekt</string>
+
+    <!-- results and toasts -->
+    <string name="saved_item">Opgeslagen: %1$s</string>
+    <string name="already_saved">Al opgeslagen</string>
+    <string name="nothing_to_save">Niets om op te slaan</string>
+    <string name="anki_not_found">AnkiDroid niet gevonden op dit apparaat</string>
+    <string name="anki_nothing_new">Niets nieuws om te sturen</string>
+    <string name="anki_pushed">%1$d kaarten naar AnkiDroid gestuurd</string>
+    <string name="anki_partial">%1$d verstuurd, %2$d mislukt</string>
+    <string name="model_deleted">Model verwijderd</string>
+    <string name="action_failed">Mislukt</string>
+    <string name="same_language">Bron- en doeltaal zijn dezelfde taal</string>
+    <string name="export_title">Woordenschat exporteren</string>
+</resources>

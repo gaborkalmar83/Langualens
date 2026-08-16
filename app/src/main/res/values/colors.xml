@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="ic_launcher_background">#1B2A4A</color>
-    <color name="tolk_accent">#3F7CFF</color>
+    <color name="lens_accent">#3F7CFF</color>
     <color name="panel_bg">#F2141821</color>
 </resources>

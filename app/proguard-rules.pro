@@ -1,4 +1,4 @@
--keepclassmembers class com.lingualens.app.ui.ReaderActivity$Bridge {
+-keepclassmembers class com.langualens.app.ui.ReaderActivity$Bridge {
    public *;
 }
 -keepattributes JavascriptInterface

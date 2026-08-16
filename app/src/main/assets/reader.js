@@ -1,64 +1,79 @@
-/* LinguaLens bilingual reader.
- * Walks the page, splits Dutch into sentences, and asks the Android side for
- * English which is then inserted directly underneath each sentence.
- * Non-destructive: only text nodes are wrapped, links and layout stay intact.
+/* LanguaLens bilingual reader.
+ * Walks the page and inserts a translation directly underneath each block of text.
+ *
+ * Two modes:
+ *   paragraph (default) - one translation per block element. Reliable on every site,
+ *                         because the block is never taken apart.
+ *   sentence            - a translation after each sentence, but only inside blocks
+ *                         that are plain text. Blocks containing links or other
+ *                         inline elements fall back to paragraph handling, which is
+ *                         what used to produce chopped-up fragments.
  */
 (function () {
-  if (window.__tolkLoaded) { return; }
-  window.__tolkLoaded = true;
+  if (window.__llLoaded) { return; }
+  window.__llLoaded = true;
 
-  var MODE = window.__tolkMode || 'sentence';   // 'sentence' | 'paragraph'
-  var HIDDEN = !!window.__tolkHidden;
+  var MODE = window.__llMode || 'paragraph';
+  var HIDDEN = !!window.__llHidden;
+  var HINT = window.__llHint || 'tap to reveal';
 
   var SKIP_TAGS = {
     SCRIPT: 1, STYLE: 1, NOSCRIPT: 1, CODE: 1, PRE: 1, TEXTAREA: 1,
     SELECT: 1, OPTION: 1, IFRAME: 1, SVG: 1, CANVAS: 1, INPUT: 1,
-    BUTTON: 1, NAV: 1, FOOTER: 1
+    BUTTON: 1, NAV: 1, FOOTER: 1, HEADER: 1, ASIDE: 1, FORM: 1
   };
-  var BLOCK_SELECTOR = 'p, li, blockquote, dd, h1, h2, h3, h4, figcaption, td, article > div';
+  var BLOCK_SELECTOR = 'p, li, blockquote, dd, dt, h1, h2, h3, h4, figcaption, td, summary';
+  /* Inline tags that do not stop a block from counting as plain text. */
+  var INLINE_OK = {
+    B: 1, I: 1, EM: 1, STRONG: 1, SPAN: 1, U: 1, SMALL: 1, MARK: 1,
+    SUB: 1, SUP: 1, ABBR: 1, TIME: 1, BR: 1, WBR: 1, FONT: 1
+  };
 
   var counter = 0;
   var pending = {};
   var queue = [];
-  var flushTimer = null;
+  var total = 0;
+  var done = 0;
 
-  /* ---------------- styling ---------------- */
+  /* ---------------------------- styling ---------------------------- */
   var style = document.createElement('style');
   style.textContent =
-    '.tolk-en{display:block !important;color:#2f6fe4;font-style:italic;' +
-    'font-size:0.92em;line-height:1.4;margin:3px 0 12px 0;' +
-    'border-left:3px solid rgba(47,111,228,.35);padding-left:9px;' +
-    'font-family:inherit;text-align:left;}' +
-    '.tolk-en:empty{display:none !important;}' +
-    '.tolk-en.tolk-veil{color:transparent;background:rgba(47,111,228,.13);' +
-    'border-radius:5px;cursor:pointer;user-select:none;}' +
-    '.tolk-en.tolk-veil::after{content:"tik voor Engels";color:#2f6fe4;' +
-    'font-size:.8em;opacity:.75;}' +
-    '.tolk-en.tolk-veil.tolk-open{color:#2f6fe4;background:transparent;}' +
-    '.tolk-en.tolk-veil.tolk-open::after{content:"";}' +
-    '@media (prefers-color-scheme: dark){.tolk-en{color:#7fb2ff;' +
-    'border-left-color:rgba(127,178,255,.4);}}' +
-    '#tolk-bar{position:fixed;left:0;right:0;bottom:0;z-index:2147483647;' +
+    '.ll-tr{display:block !important;color:#2f6fe4;font-style:italic;' +
+    'font-size:0.92em;line-height:1.45;margin:4px 0 14px 0;' +
+    'border-left:3px solid rgba(47,111,228,.35);padding-left:10px;' +
+    'font-family:inherit;text-align:left;font-weight:400;}' +
+    '.ll-tr:empty{display:none !important;}' +
+    '.ll-tr.ll-veil{color:transparent;background:rgba(47,111,228,.13);' +
+    'border-radius:5px;cursor:pointer;-webkit-user-select:none;user-select:none;}' +
+    '.ll-tr.ll-veil::after{content:attr(data-hint);color:#2f6fe4;' +
+    'font-size:.8em;opacity:.7;}' +
+    '.ll-tr.ll-veil.ll-open{color:#2f6fe4;background:transparent;}' +
+    '.ll-tr.ll-veil.ll-open::after{content:"";}' +
+    '@media (prefers-color-scheme: dark){.ll-tr{color:#7fb2ff;' +
+    'border-left-color:rgba(127,178,255,.4);}' +
+    '.ll-tr.ll-veil.ll-open{color:#7fb2ff;}' +
+    '.ll-tr.ll-veil::after{color:#7fb2ff;}}' +
+    '#ll-bar{position:fixed;left:0;right:0;bottom:0;z-index:2147483647;' +
     'display:none;gap:8px;padding:10px 12px;background:rgba(20,24,33,.96);' +
     'font-family:-apple-system,Roboto,sans-serif;box-shadow:0 -2px 12px rgba(0,0,0,.4);}' +
-    '#tolk-bar button{flex:1;border:none;border-radius:10px;padding:12px 8px;' +
+    '#ll-bar button{flex:1;border:none;border-radius:10px;padding:12px 8px;' +
     'font-size:14px;font-weight:600;background:#2f6fe4;color:#fff;}' +
-    '#tolk-bar button.sec{background:#2c3446;color:#dbe4f5;}' +
-    '#tolk-progress{position:fixed;top:0;left:0;height:3px;width:0;' +
-    'background:#2f6fe4;z-index:2147483647;transition:width .25s ease;}';
+    '#ll-bar button.sec{background:#2c3446;color:#dbe4f5;}' +
+    '#ll-progress{position:fixed;top:0;left:0;height:3px;width:0;' +
+    'background:#2f6fe4;z-index:2147483647;transition:width .25s ease,opacity .4s ease;}';
   (document.head || document.documentElement).appendChild(style);
 
   var progress = document.createElement('div');
-  progress.id = 'tolk-progress';
+  progress.id = 'll-progress';
   document.documentElement.appendChild(progress);
 
-  /* ---------------- selection action bar ---------------- */
+  /* ---------------------- selection action bar ---------------------- */
   var bar = document.createElement('div');
-  bar.id = 'tolk-bar';
+  bar.id = 'll-bar';
   bar.innerHTML =
-    '<button id="tolk-save">Bewaar</button>' +
-    '<button id="tolk-look" class="sec">Vertaal</button>' +
-    '<button id="tolk-say" class="sec">Spreek uit</button>';
+    '<button id="ll-save">&#9733;</button>' +
+    '<button id="ll-look" class="sec">&#8644;</button>' +
+    '<button id="ll-say" class="sec">&#9835;</button>';
   document.documentElement.appendChild(bar);
 
   function selectedText() {
@@ -67,58 +82,57 @@
   }
 
   document.addEventListener('selectionchange', function () {
-    var t = selectedText();
-    bar.style.display = t.length > 0 ? 'flex' : 'none';
+    bar.style.display = selectedText().length > 0 ? 'flex' : 'none';
   });
 
   bar.addEventListener('mousedown', function (e) { e.preventDefault(); });
 
-  document.getElementById('tolk-save').addEventListener('click', function () {
+  document.getElementById('ll-save').addEventListener('click', function () {
     var t = selectedText();
     if (!t) { return; }
-    var ctx = contextFor(t);
-    LinguaLens.save(t, ctx, document.title + ' — ' + location.href);
+    LanguaLens.save(t, contextFor(), document.title + ' | ' + location.href);
     bar.style.display = 'none';
     var s = window.getSelection(); if (s) { s.removeAllRanges(); }
   });
 
-  document.getElementById('tolk-look').addEventListener('click', function () {
+  document.getElementById('ll-look').addEventListener('click', function () {
     var t = selectedText();
-    if (t) { LinguaLens.lookup(t); }
+    if (t) { LanguaLens.lookup(t); }
   });
 
-  document.getElementById('tolk-say').addEventListener('click', function () {
+  document.getElementById('ll-say').addEventListener('click', function () {
     var t = selectedText();
-    if (t) { LinguaLens.speak(t); }
+    if (t) { LanguaLens.speak(t); }
   });
 
-  function contextFor(text) {
+  function contextFor() {
     var s = window.getSelection();
     if (!s || s.rangeCount === 0) { return ''; }
     var node = s.getRangeAt(0).startContainer;
     var el = node.nodeType === 3 ? node.parentElement : node;
-    var host = el ? el.closest('.tolk-sent, p, li, blockquote, td, h1, h2, h3') : null;
+    var host = el && el.closest ? el.closest('.ll-src, p, li, blockquote, td, h1, h2, h3') : null;
     var ctx = host ? host.textContent.trim() : '';
     return ctx.length > 400 ? ctx.slice(0, 400) : ctx;
   }
 
-  /* ---------------- sentence splitting ---------------- */
+  /* ------------------------ sentence splitting ------------------------ */
   var ABBR = ['dhr', 'mevr', 'mw', 'bijv', 'bv', 'enz', 'nr', 'art', 'blz', 'ca',
     'dr', 'prof', 'ir', 'drs', 'mr', 'st', 'nl', 'zgn', 'evt', 'tel', 'fig',
-    'incl', 'excl', 'max', 'min', 'vs', 'etc', 'jr', 'sr', 'ong', 'resp', 'pag'];
+    'incl', 'excl', 'max', 'min', 'vs', 'etc', 'jr', 'sr', 'ong', 'resp', 'pag',
+    'ill', 'kb', 'zb', 'ua', 'usw', 'bzw', 'ggf', 'ca', 'ejem', 'aprox'];
 
   function splitSentences(text) {
     var out = [];
     var buf = '';
     for (var i = 0; i < text.length; i++) {
-      var c = text[i];
+      var c = text.charAt(i);
       buf += c;
       if (c === '.' || c === '!' || c === '?' || c === '…') {
         var j = i + 1;
-        while (j < text.length && '"”\')».!?'.indexOf(text[j]) >= 0) {
-          buf += text[j]; j++;
+        while (j < text.length && '"”\')».!?'.indexOf(text.charAt(j)) >= 0) {
+          buf += text.charAt(j); j++;
         }
-        var next = j < text.length ? text[j] : null;
+        var next = j < text.length ? text.charAt(j) : null;
         var boundary = next === null || next === ' ' || next === '\n' || next === '\t';
         if (boundary && !endsAbbr(buf)) {
           out.push(buf);
@@ -134,133 +148,116 @@
   function endsAbbr(s) {
     var t = s.replace(/\s+$/, '');
     if (t.charAt(t.length - 1) !== '.') { return false; }
-    var body = t.slice(0, -1);
-    var m = body.match(/([A-Za-zÀ-ÿ\.]+)$/);
+    var m = t.slice(0, -1).match(/([A-Za-zÀ-ɏ.]+)$/);
     if (!m) { return false; }
     var tok = m[1].toLowerCase();
-    if (tok.length === 1) { return true; }               // initial, e.g. "J."
+    if (tok.length === 1) { return true; }
     return ABBR.indexOf(tok) >= 0;
   }
 
-  /* ---------------- collecting work ---------------- */
+  /* --------------------------- collecting --------------------------- */
   function isVisible(el) {
     if (!el) { return false; }
     var s = window.getComputedStyle(el);
-    return s && s.display !== 'none' && s.visibility !== 'hidden';
+    return !!s && s.display !== 'none' && s.visibility !== 'hidden';
   }
 
-  function hasLetters(s) { return /[a-zA-ZÀ-ÿ]/.test(s); }
+  function hasLetters(s) { return /[A-Za-zÀ-ɏͰ-ӿ]/.test(s); }
 
-  function makeSlot(afterNode, parent, text) {
-    var id = 't' + (++counter);
+  function skipped(el) {
+    if (!el || SKIP_TAGS[el.tagName]) { return true; }
+    if (el.closest && (el.closest('.ll-tr') || el.closest('#ll-bar'))) { return true; }
+    if (el.querySelector && el.querySelector('.ll-tr')) { return true; }
+    return !isVisible(el);
+  }
+
+  /** A block counts as plain text when every child element is harmless inline markup. */
+  function isPlainTextBlock(el) {
+    var kids = el.children;
+    for (var i = 0; i < kids.length; i++) {
+      if (!INLINE_OK[kids[i].tagName]) { return false; }
+    }
+    return true;
+  }
+
+  function makeSlot() {
+    var id = 'n' + (++counter);
     var slot = document.createElement('span');
-    slot.className = 'tolk-en' + (HIDDEN ? ' tolk-veil' : '');
-    slot.setAttribute('data-tolk', id);
-    if (HIDDEN) {
-      slot.addEventListener('click', function () { slot.classList.toggle('tolk-open'); });
-    }
-    if (afterNode && afterNode.parentNode) {
-      afterNode.parentNode.insertBefore(slot, afterNode.nextSibling);
-    } else if (parent) {
-      parent.appendChild(slot);
-    }
+    slot.className = 'll-tr' + (HIDDEN ? ' ll-veil' : '');
+    slot.setAttribute('data-hint', HINT);
+    slot.setAttribute('data-ll', id);
+    slot.addEventListener('click', function () {
+      if (slot.classList.contains('ll-veil')) { slot.classList.toggle('ll-open'); }
+    });
     pending[id] = slot;
-    queue.push({ id: id, text: text });
-    return slot;
+    return { id: id, node: slot };
   }
 
-  function collectParagraphMode() {
+  function appendBlockTranslation(el, text) {
+    var slot = makeSlot();
+    el.appendChild(slot.node);
+    queue.push({ id: slot.id, text: text });
+  }
+
+  function splitBlockIntoSentences(el) {
+    var raw = (el.textContent || '').trim();
+    var sentences = splitSentences(raw);
+    if (sentences.length < 2) {
+      appendBlockTranslation(el, raw);
+      return;
+    }
+    var frag = document.createDocumentFragment();
+    var slots = [];
+    for (var k = 0; k < sentences.length; k++) {
+      var piece = sentences[k];
+      var trimmed = piece.trim();
+      var host = document.createElement('span');
+      host.className = 'll-src';
+      host.appendChild(document.createTextNode(piece));
+      frag.appendChild(host);
+      if (trimmed.length >= 12 && hasLetters(trimmed)) {
+        var slot = makeSlot();
+        frag.appendChild(slot.node);
+        slots.push({ id: slot.id, text: trimmed });
+      }
+    }
+    el.innerHTML = '';
+    el.appendChild(frag);
+    for (var q = 0; q < slots.length; q++) { queue.push(slots[q]); }
+  }
+
+  function collect() {
     var blocks = document.querySelectorAll(BLOCK_SELECTOR);
     for (var i = 0; i < blocks.length; i++) {
       var el = blocks[i];
-      if (el.querySelector('.tolk-en')) { continue; }
-      if (el.closest('.tolk-en')) { continue; }
-      if (SKIP_TAGS[el.tagName]) { continue; }
-      if (!isVisible(el)) { continue; }
-      var txt = (el.innerText || el.textContent || '').trim();
-      if (txt.length < 25 || !hasLetters(txt)) { continue; }
-      if (txt.length > 1800) { txt = txt.slice(0, 1800); }
-      makeSlot(null, el, txt);
+      if (skipped(el)) { continue; }
+
+      var text = (el.innerText || el.textContent || '').trim();
+      if (text.length < 25 || !hasLetters(text)) { continue; }
+
+      /* Skip wrappers whose text belongs to a nested block we will handle anyway. */
+      if (el.querySelector(BLOCK_SELECTOR)) { continue; }
+
+      if (MODE === 'sentence' && isPlainTextBlock(el)) {
+        splitBlockIntoSentences(el);
+      } else {
+        appendBlockTranslation(el, text.length > 1800 ? text.slice(0, 1800) : text);
+      }
     }
   }
 
-  function collectSentenceMode() {
-    var walker = document.createTreeWalker(
-      document.body, NodeFilter.SHOW_TEXT,
-      {
-        acceptNode: function (node) {
-          var t = node.nodeValue;
-          if (!t || t.trim().length < 20 || !hasLetters(t)) {
-            return NodeFilter.FILTER_REJECT;
-          }
-          var p = node.parentElement;
-          if (!p || SKIP_TAGS[p.tagName]) { return NodeFilter.FILTER_REJECT; }
-          if (p.classList.contains('tolk-en') || p.closest('.tolk-en')) {
-            return NodeFilter.FILTER_REJECT;
-          }
-          if (p.closest('#tolk-bar')) { return NodeFilter.FILTER_REJECT; }
-          if (!isVisible(p)) { return NodeFilter.FILTER_REJECT; }
-          return NodeFilter.FILTER_ACCEPT;
-        }
-      }
-    );
-
-    var nodes = [];
-    var n;
-    while ((n = walker.nextNode())) { nodes.push(n); }
-
-    for (var i = 0; i < nodes.length; i++) {
-      var node = nodes[i];
-      var parent = node.parentNode;
-      if (!parent) { continue; }
-      var sentences = splitSentences(node.nodeValue);
-      if (!sentences.length) { continue; }
-
-      var frag = document.createDocumentFragment();
-      var slots = [];
-      for (var k = 0; k < sentences.length; k++) {
-        var raw = sentences[k];
-        var trimmed = raw.trim();
-        var span = document.createElement('span');
-        span.className = 'tolk-sent';
-        span.appendChild(document.createTextNode(raw));
-        frag.appendChild(span);
-        if (trimmed.length >= 12 && hasLetters(trimmed)) {
-          var id = 't' + (++counter);
-          var slot = document.createElement('span');
-          slot.className = 'tolk-en' + (HIDDEN ? ' tolk-veil' : '');
-          slot.setAttribute('data-tolk', id);
-          if (HIDDEN) {
-            (function (s) {
-              s.addEventListener('click', function () { s.classList.toggle('tolk-open'); });
-            })(slot);
-          }
-          frag.appendChild(slot);
-          pending[id] = slot;
-          slots.push({ id: id, text: trimmed });
-        }
-      }
-      parent.replaceChild(frag, node);
-      for (var q = 0; q < slots.length; q++) { queue.push(slots[q]); }
-    }
-  }
-
-  /* ---------------- talking to Android ---------------- */
-  var total = 0, done = 0;
-
+  /* ----------------------- talking to Android ----------------------- */
   function flush() {
     if (!queue.length) { return; }
     var batch = queue.splice(0, 25);
     total += batch.length;
     try {
-      LinguaLens.requestTranslate(JSON.stringify(batch));
-    } catch (e) { /* bridge missing */ }
-    if (queue.length) {
-      flushTimer = setTimeout(flush, 60);
-    }
+      LanguaLens.requestTranslate(JSON.stringify(batch));
+    } catch (e) { /* bridge not attached */ }
+    if (queue.length) { setTimeout(flush, 60); }
   }
 
-  window.tolkApply = function (json) {
+  window.llApply = function (json) {
     var map;
     try { map = JSON.parse(json); } catch (e) { return; }
     for (var id in map) {
@@ -274,43 +271,35 @@
     var pct = total ? Math.round((done / total) * 100) : 100;
     progress.style.width = pct + '%';
     if (pct >= 100) {
-      setTimeout(function () { progress.style.opacity = '0'; }, 500);
+      setTimeout(function () { progress.style.opacity = '0'; }, 600);
     }
   };
 
-  window.tolkRun = function () {
-    counter = 0;
-    if (MODE === 'paragraph') { collectParagraphMode(); } else { collectSentenceMode(); }
+  window.llRun = function () {
+    progress.style.opacity = '1';
+    collect();
     flush();
-    try { LinguaLens.onReady(queue.length + total); } catch (e) {}
   };
 
-  window.tolkSetHidden = function (hidden) {
+  window.llSetHidden = function (hidden) {
     HIDDEN = !!hidden;
-    var els = document.querySelectorAll('.tolk-en');
+    var els = document.querySelectorAll('.ll-tr');
     for (var i = 0; i < els.length; i++) {
-      if (HIDDEN) { els[i].classList.add('tolk-veil'); }
-      else { els[i].classList.remove('tolk-veil', 'tolk-open'); }
+      if (HIDDEN) {
+        els[i].classList.add('ll-veil');
+        els[i].classList.remove('ll-open');
+      } else {
+        els[i].classList.remove('ll-veil', 'll-open');
+      }
     }
   };
 
-  window.tolkClear = function () {
-    var els = document.querySelectorAll('.tolk-en');
-    for (var i = 0; i < els.length; i++) { els[i].parentNode.removeChild(els[i]); }
-    pending = {}; queue = []; total = 0; done = 0;
-    window.__tolkLoaded = true;
-  };
-
-  // Re-scan when infinite-scroll pages add content.
-  var rescanTimer = null;
-  var observer = new MutationObserver(function () {
-    if (rescanTimer) { clearTimeout(rescanTimer); }
-    rescanTimer = setTimeout(function () {
-      if (MODE === 'paragraph') { collectParagraphMode(); } else { collectSentenceMode(); }
-      flush();
-    }, 900);
-  });
+  /* Pick up content added by infinite scroll. */
+  var rescan = null;
   try {
-    observer.observe(document.body, { childList: true, subtree: true });
-  } catch (e) {}
+    new MutationObserver(function () {
+      if (rescan) { clearTimeout(rescan); }
+      rescan = setTimeout(function () { collect(); flush(); }, 900);
+    }).observe(document.body, { childList: true, subtree: true });
+  } catch (e) { /* no body yet */ }
 })();

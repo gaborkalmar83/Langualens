@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">LanguaLens</string>
+    <string name="reader_title">LanguaLens Reader</string>
+    <string name="process_text_label">LanguaLens</string>
+    <string name="accessibility_label">Lecteur d\'écran LanguaLens</string>
+    <string name="accessibility_description">Permet à LanguaLens de lire le texte affiché à l\'écran afin de proposer les traductions dans le panneau flottant. Le texte est traduit sur l\'appareil et n\'est jamais envoyé en ligne.</string>
+
+    <!-- navigation -->
+    <string name="tab_read">Lire</string>
+    <string name="tab_words">Mots</string>
+    <string name="tab_practice">Réviser</string>
+    <string name="tab_settings">Paramètres</string>
+
+    <!-- read screen -->
+    <string name="read_subtitle">Lisez dans une langue, avec l\'autre en dessous.</string>
+    <string name="from_language">De</string>
+    <string name="to_language">Vers</string>
+    <string name="swap_languages">Inverser</string>
+    <string name="model_missing_title">Modèle hors connexion pas encore téléchargé</string>
+    <string name="model_missing_body">Environ 30 Mo par langue. Une fois téléchargé, la traduction fonctionne sans connexion.</string>
+    <string name="download_model">Télécharger le modèle</string>
+    <string name="working">En cours…</string>
+    <string name="model_ready">Modèle prêt</string>
+    <string name="url_label">Lien de l\'article</string>
+    <string name="open_reader">Ouvrir dans le lecteur bilingue</string>
+    <string name="paste_label">Ou collez du texte ici</string>
+    <string name="read_this_text">Lire ce texte</string>
+    <string name="translate_anywhere">Traduire partout</string>
+    <string name="howto_body">1. Sélectionnez du texte dans Chrome, Discord ou WhatsApp, puis choisissez LanguaLens dans le menu.\n2. Ou activez le bouton flottant et appuyez dessus pour traduire tout l\'écran.</string>
+    <string name="perm_overlay">Afficher par-dessus les autres applications</string>
+    <string name="perm_accessibility">Accessibilité : lecteur d\'écran LanguaLens</string>
+    <string name="turn_on">Activer</string>
+    <string name="bubble_on">Bouton activé</string>
+    <string name="bubble_off">Bouton désactivé</string>
+
+    <!-- words screen -->
+    <string name="search_hint">Rechercher (%1$d enregistrés)</string>
+    <string name="speak">Écouter</string>
+    <string name="delete">Supprimer</string>
+    <string name="nothing_saved">Rien d\'enregistré pour l\'instant</string>
+
+    <!-- practice screen -->
+    <string name="practice_title">Révision</string>
+    <string name="loading">Chargement…</string>
+    <string name="nothing_due">Rien à réviser pour le moment.</string>
+    <string name="reload">Recharger</string>
+    <string name="show_answer">Afficher la réponse</string>
+    <string name="grade_again">À revoir</string>
+    <string name="grade_hard">Difficile</string>
+    <string name="grade_good">Correct</string>
+    <string name="grade_easy">Facile</string>
+    <string name="card_progress">%1$d / %2$d</string>
+
+    <!-- settings screen -->
+    <string name="settings_title">Paramètres</string>
+    <string name="section_reading">Lecture</string>
+    <string name="mode_paragraph">Traduire par paragraphe (désactivé = par phrase)</string>
+    <string name="hide_translation">Masquer la traduction jusqu\'à l\'appui</string>
+    <string name="auto_translate">Traduire automatiquement à l\'ouverture d\'une page</string>
+    <string name="interface_language">Langue de l\'application</string>
+    <string name="section_anki">Anki</string>
+    <string name="anki_found">AnkiDroid détecté sur cet appareil.</string>
+    <string name="anki_missing">AnkiDroid introuvable. L\'export dans un fichier reste possible.</string>
+    <string name="anki_deck">Paquet</string>
+    <string name="anki_model">Type de note (généralement Basic)</string>
+    <string name="anki_auto_push">Envoyer directement les nouveaux éléments vers AnkiDroid</string>
+    <string name="anki_push">Envoyer vers Anki</string>
+    <string name="export">Exporter</string>
+    <string name="section_models">Modèles hors connexion</string>
+    <string name="download">Télécharger</string>
+    <string name="remove">Retirer</string>
+    <string name="downloaded_models">Téléchargés : %1$s</string>
+    <string name="none">aucun</string>
+
+    <!-- reader toolbar -->
+    <string name="reader_mode_paragraph">PARAGR.</string>
+    <string name="reader_mode_sentence">PHRASE</string>
+    <string name="reader_show">AFFICHER</string>
+    <string name="reader_hidden">MASQUÉ</string>
+    <string name="reader_translate">TRADUIRE</string>
+    <string name="reader_tap_hint">appuyez pour afficher</string>
+    <string name="reader_placeholder">Collez un texte ou ouvrez un lien avec LanguaLens.</string>
+    <string name="reader_missing_script">reader.js est introuvable</string>
+    <string name="text_label">Texte</string>
+
+    <!-- quick popup -->
+    <string name="translating">Traduction…</string>
+    <string name="save">Enregistrer</string>
+    <string name="read">Lire</string>
+    <string name="no_translation">Aucune traduction. Ouvrez LanguaLens et téléchargez le modèle hors connexion.</string>
+
+    <!-- bubble panel -->
+    <string name="bubble_channel">Bulle LanguaLens</string>
+    <string name="bubble_running">Le bouton de traduction flottant est actif</string>
+    <string name="stop">Arrêter</string>
+    <string name="screen_translated">Écran traduit (%1$d)</string>
+    <string name="refresh">Actualiser</string>
+    <string name="close">Fermer</string>
+    <string name="tap_row_hint">Appuyez sur une ligne pour l\'enregistrer dans Anki</string>
+    <string name="no_text_found">Aucun texte trouvé à l\'écran</string>
+    <string name="enable_accessibility_first">Activez d\'abord le lecteur d\'écran LanguaLens dans Accessibilité</string>
+    <string name="overlay_missing">L\'autorisation d\'affichage par-dessus les autres applications est manquante</string>
+
+    <!-- results and toasts -->
+    <string name="saved_item">Enregistré : %1$s</string>
+    <string name="already_saved">Déjà enregistré</string>
+    <string name="nothing_to_save">Rien à enregistrer</string>
+    <string name="anki_not_found">AnkiDroid introuvable sur cet appareil</string>
+    <string name="anki_nothing_new">Rien de nouveau à envoyer</string>
+    <string name="anki_pushed">%1$d cartes envoyées vers AnkiDroid</string>
+    <string name="anki_partial">%1$d envoyées, %2$d en échec</string>
+    <string name="model_deleted">Modèle supprimé</string>
+    <string name="action_failed">Échec</string>
+    <string name="same_language">La langue source et la langue cible sont identiques</string>
+    <string name="export_title">Exporter le vocabulaire</string>
+</resources>

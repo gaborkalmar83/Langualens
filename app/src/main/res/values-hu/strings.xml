@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">LanguaLens</string>
+    <string name="reader_title">LanguaLens Reader</string>
+    <string name="process_text_label">LanguaLens</string>
+    <string name="accessibility_label">LanguaLens képernyőolvasó</string>
+    <string name="accessibility_description">Lehetővé teszi, hogy a LanguaLens beolvassa a képernyőn látható szöveget, és megjelenítse a fordítást a lebegő panelen. A fordítás az eszközön történik, a szöveg soha nem kerül feltöltésre.</string>
+
+    <!-- navigation -->
+    <string name="tab_read">Olvasás</string>
+    <string name="tab_words">Szavak</string>
+    <string name="tab_practice">Gyakorlás</string>
+    <string name="tab_settings">Beállítások</string>
+
+    <!-- read screen -->
+    <string name="read_subtitle">Olvasson az egyik nyelven, alatta a másikkal.</string>
+    <string name="from_language">Forrás</string>
+    <string name="to_language">Cél</string>
+    <string name="swap_languages">Csere</string>
+    <string name="model_missing_title">Az offline modell még nincs letöltve</string>
+    <string name="model_missing_body">Nyelvenként körülbelül 30 MB. Letöltés után a fordítás internet nélkül is működik.</string>
+    <string name="download_model">Modell letöltése</string>
+    <string name="working">Folyamatban…</string>
+    <string name="model_ready">A modell készen áll</string>
+    <string name="url_label">Cikk hivatkozása</string>
+    <string name="open_reader">Megnyitás kétnyelvű olvasóban</string>
+    <string name="paste_label">Vagy illesszen be ide szöveget</string>
+    <string name="read_this_text">Szöveg olvasása</string>
+    <string name="translate_anywhere">Fordítás bárhol</string>
+    <string name="howto_body">1. Jelöljön ki szöveget a Chrome-ban, a Discordon vagy a WhatsAppban, majd válassza a menüből a LanguaLenst.\n2. Vagy kapcsolja be a lebegő gombot, és koppintson rá a teljes képernyő lefordításához.</string>
+    <string name="perm_overlay">Rajzolás más alkalmazások fölé</string>
+    <string name="perm_accessibility">Kisegítő lehetőségek: LanguaLens képernyőolvasó</string>
+    <string name="turn_on">Bekapcsolás</string>
+    <string name="bubble_on">Gomb be</string>
+    <string name="bubble_off">Gomb ki</string>
+
+    <!-- words screen -->
+    <string name="search_hint">Keresés (%1$d mentve)</string>
+    <string name="speak">Kimondás</string>
+    <string name="delete">Törlés</string>
+    <string name="nothing_saved">Még nincs mentve semmi</string>
+
+    <!-- practice screen -->
+    <string name="practice_title">Gyakorlás</string>
+    <string name="loading">Betöltés…</string>
+    <string name="nothing_due">Jelenleg nincs mit ismételni.</string>
+    <string name="reload">Újratöltés</string>
+    <string name="show_answer">Válasz mutatása</string>
+    <string name="grade_again">Újra</string>
+    <string name="grade_hard">Nehéz</string>
+    <string name="grade_good">Jó</string>
+    <string name="grade_easy">Könnyű</string>
+    <string name="card_progress">%1$d / %2$d</string>
+
+    <!-- settings screen -->
+    <string name="settings_title">Beállítások</string>
+    <string name="section_reading">Olvasás</string>
+    <string name="mode_paragraph">Fordítás bekezdésenként (kikapcsolva: mondatonként)</string>
+    <string name="hide_translation">Fordítás elrejtése koppintásig</string>
+    <string name="auto_translate">Automatikus fordítás az oldal megnyitásakor</string>
+    <string name="interface_language">Az alkalmazás nyelve</string>
+    <string name="section_anki">Anki</string>
+    <string name="anki_found">Az AnkiDroid megtalálható ezen az eszközön.</string>
+    <string name="anki_missing">Az AnkiDroid nem található. A fájlba exportálás továbbra is működik.</string>
+    <string name="anki_deck">Pakli</string>
+    <string name="anki_model">Jegyzettípus (általában Basic)</string>
+    <string name="anki_auto_push">Új elemek küldése azonnal az AnkiDroidba</string>
+    <string name="anki_push">Küldés az Ankiba</string>
+    <string name="export">Exportálás</string>
+    <string name="section_models">Offline modellek</string>
+    <string name="download">Letöltés</string>
+    <string name="remove">Eltávolítás</string>
+    <string name="downloaded_models">Letöltve: %1$s</string>
+    <string name="none">nincs</string>
+
+    <!-- reader toolbar -->
+    <string name="reader_mode_paragraph">BEKEZDÉS</string>
+    <string name="reader_mode_sentence">MONDAT</string>
+    <string name="reader_show">MUTAT</string>
+    <string name="reader_hidden">REJTVE</string>
+    <string name="reader_translate">FORDÍT</string>
+    <string name="reader_tap_hint">koppintson a megjelenítéshez</string>
+    <string name="reader_placeholder">Illesszen be szöveget, vagy nyisson meg egy hivatkozást a LanguaLensben.</string>
+    <string name="reader_missing_script">Hiányzik a reader.js</string>
+    <string name="text_label">Szöveg</string>
+
+    <!-- quick popup -->
+    <string name="translating">Fordítás…</string>
+    <string name="save">Mentés</string>
+    <string name="read">Olvasás</string>
+    <string name="no_translation">Nincs fordítás. Nyissa meg a LanguaLenst, és töltse le az offline modellt.</string>
+
+    <!-- bubble panel -->
+    <string name="bubble_channel">LanguaLens buborék</string>
+    <string name="bubble_running">A lebegő fordítógomb aktív</string>
+    <string name="stop">Leállítás</string>
+    <string name="screen_translated">Képernyő lefordítva (%1$d)</string>
+    <string name="refresh">Frissítés</string>
+    <string name="close">Bezárás</string>
+    <string name="tap_row_hint">Koppintson egy sorra, hogy elmentse az Ankihoz</string>
+    <string name="no_text_found">Nem található szöveg a képernyőn</string>
+    <string name="enable_accessibility_first">Először kapcsolja be a LanguaLens képernyőolvasót a Kisegítő lehetőségeknél</string>
+    <string name="overlay_missing">Hiányzik a más alkalmazások fölé rajzolás engedélye</string>
+
+    <!-- results and toasts -->
+    <string name="saved_item">Mentve: %1$s</string>
+    <string name="already_saved">Már el van mentve</string>
+    <string name="nothing_to_save">Nincs mit menteni</string>
+    <string name="anki_not_found">Az AnkiDroid nem található ezen az eszközön</string>
+    <string name="anki_nothing_new">Nincs új küldenivaló</string>
+    <string name="anki_pushed">%1$d kártya elküldve az AnkiDroidba</string>
+    <string name="anki_partial">%1$d elküldve, %2$d sikertelen</string>
+    <string name="model_deleted">Modell eltávolítva</string>
+    <string name="action_failed">Sikertelen</string>
+    <string name="same_language">A forrás- és a célnyelv azonos</string>
+    <string name="export_title">Szókincs exportálása</string>
+</resources>

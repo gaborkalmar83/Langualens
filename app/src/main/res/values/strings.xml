@@ -1,9 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">LinguaLens</string>
-    <string name="reader_title">LinguaLens Reader</string>
-    <string name="process_text_label">LinguaLens: vertaal</string>
-    <string name="accessibility_label">LinguaLens screen reader</string>
-    <string name="accessibility_description">Lets LinguaLens read the Dutch text shown on screen so it can show English translations in the floating panel. Text is translated on-device and never uploaded.</string>
-    <string name="bubble_channel">LinguaLens bubble</string>
+    <string name="app_name">LanguaLens</string>
+    <string name="reader_title">LanguaLens Reader</string>
+    <string name="process_text_label">LanguaLens</string>
+    <string name="accessibility_label">LanguaLens screen reader</string>
+    <string name="accessibility_description">Lets LanguaLens read the text shown on screen so it can show translations in the floating panel. Text is translated on-device and never uploaded.</string>
+
+    <!-- navigation -->
+    <string name="tab_read">Read</string>
+    <string name="tab_words">Words</string>
+    <string name="tab_practice">Practice</string>
+    <string name="tab_settings">Settings</string>
+
+    <!-- read screen -->
+    <string name="read_subtitle">Read in one language with another underneath.</string>
+    <string name="from_language">From</string>
+    <string name="to_language">To</string>
+    <string name="swap_languages">Swap</string>
+    <string name="model_missing_title">Offline model not downloaded yet</string>
+    <string name="model_missing_body">Roughly 30 MB per language. Once downloaded, translation works without internet.</string>
+    <string name="download_model">Download model</string>
+    <string name="working">Working…</string>
+    <string name="model_ready">Model ready</string>
+    <string name="url_label">Article link</string>
+    <string name="open_reader">Open in bilingual reader</string>
+    <string name="paste_label">Or paste text here</string>
+    <string name="read_this_text">Read this text</string>
+    <string name="translate_anywhere">Translate anywhere</string>
+    <string name="howto_body">1. Select text in Chrome, Discord or WhatsApp and choose LanguaLens from the menu.\n2. Or turn on the floating button and tap it to translate the whole screen.</string>
+    <string name="perm_overlay">Draw over other apps</string>
+    <string name="perm_accessibility">Accessibility: LanguaLens screen reader</string>
+    <string name="turn_on">Turn on</string>
+    <string name="bubble_on">Button on</string>
+    <string name="bubble_off">Button off</string>
+
+    <!-- words screen -->
+    <string name="search_hint">Search (%1$d saved)</string>
+    <string name="speak">Speak</string>
+    <string name="delete">Delete</string>
+    <string name="nothing_saved">Nothing saved yet</string>
+
+    <!-- practice screen -->
+    <string name="practice_title">Practice</string>
+    <string name="loading">Loading…</string>
+    <string name="nothing_due">Nothing to review right now.</string>
+    <string name="reload">Reload</string>
+    <string name="show_answer">Show answer</string>
+    <string name="grade_again">Again</string>
+    <string name="grade_hard">Hard</string>
+    <string name="grade_good">Good</string>
+    <string name="grade_easy">Easy</string>
+    <string name="card_progress">%1$d / %2$d</string>
+
+    <!-- settings screen -->
+    <string name="settings_title">Settings</string>
+    <string name="section_reading">Reading</string>
+    <string name="mode_paragraph">Translate per paragraph (off = per sentence)</string>
+    <string name="hide_translation">Hide translation until tapped</string>
+    <string name="auto_translate">Translate automatically when a page opens</string>
+    <string name="interface_language">App language</string>
+    <string name="section_anki">Anki</string>
+    <string name="anki_found">AnkiDroid found on this device.</string>
+    <string name="anki_missing">AnkiDroid not found. File export still works.</string>
+    <string name="anki_deck">Deck</string>
+    <string name="anki_model">Note type (usually Basic)</string>
+    <string name="anki_auto_push">Send new items straight to AnkiDroid</string>
+    <string name="anki_push">Send to Anki</string>
+    <string name="export">Export</string>
+    <string name="section_models">Offline models</string>
+    <string name="download">Download</string>
+    <string name="remove">Remove</string>
+    <string name="downloaded_models">Downloaded: %1$s</string>
+    <string name="none">none</string>
+
+    <!-- reader toolbar -->
+    <string name="reader_mode_paragraph">PARA</string>
+    <string name="reader_mode_sentence">SENT</string>
+    <string name="reader_show">SHOW</string>
+    <string name="reader_hidden">HIDDEN</string>
+    <string name="reader_translate">TRANSLATE</string>
+    <string name="reader_tap_hint">tap to reveal</string>
+    <string name="reader_placeholder">Paste a text or open a link with LanguaLens.</string>
+    <string name="reader_missing_script">reader.js is missing</string>
+    <string name="text_label">Text</string>
+
+    <!-- quick popup -->
+    <string name="translating">Translating…</string>
+    <string name="save">Save</string>
+    <string name="read">Read</string>
+    <string name="no_translation">No translation. Open LanguaLens and download the offline model.</string>
+
+    <!-- bubble panel -->
+    <string name="bubble_channel">LanguaLens bubble</string>
+    <string name="bubble_running">Floating translate button is active</string>
+    <string name="stop">Stop</string>
+    <string name="screen_translated">Screen translated (%1$d)</string>
+    <string name="refresh">Refresh</string>
+    <string name="close">Close</string>
+    <string name="tap_row_hint">Tap a line to save it for Anki</string>
+    <string name="no_text_found">No text found on screen</string>
+    <string name="enable_accessibility_first">First turn on the LanguaLens screen reader under Accessibility</string>
+    <string name="overlay_missing">Permission to draw over other apps is missing</string>
+
+    <!-- results and toasts -->
+    <string name="saved_item">Saved: %1$s</string>
+    <string name="already_saved">Already saved</string>
+    <string name="nothing_to_save">Nothing to save</string>
+    <string name="anki_not_found">AnkiDroid not found on this device</string>
+    <string name="anki_nothing_new">Nothing new to send</string>
+    <string name="anki_pushed">Sent %1$d cards to AnkiDroid</string>
+    <string name="anki_partial">Sent %1$d, failed %2$d</string>
+    <string name="model_deleted">Model removed</string>
+    <string name="action_failed">Failed</string>
+    <string name="same_language">Source and target are the same language</string>
+    <string name="export_title">Export vocabulary</string>
 </resources>

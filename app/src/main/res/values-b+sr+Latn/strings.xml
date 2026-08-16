@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">LanguaLens</string>
+    <string name="reader_title">LanguaLens Reader</string>
+    <string name="process_text_label">LanguaLens</string>
+    <string name="accessibility_label">LanguaLens čitač ekrana</string>
+    <string name="accessibility_description">Omogućava aplikaciji LanguaLens da čita tekst prikazan na ekranu kako bi prevode prikazala u plutajućem panelu. Tekst se prevodi na samom uređaju i nikada se ne otprema na internet.</string>
+
+    <!-- navigation -->
+    <string name="tab_read">Čitanje</string>
+    <string name="tab_words">Reči</string>
+    <string name="tab_practice">Vežbanje</string>
+    <string name="tab_settings">Podešavanja</string>
+
+    <!-- read screen -->
+    <string name="read_subtitle">Čitajte na jednom jeziku, sa drugim ispod.</string>
+    <string name="from_language">Sa</string>
+    <string name="to_language">Na</string>
+    <string name="swap_languages">Zameni</string>
+    <string name="model_missing_title">Oflajn model još nije preuzet</string>
+    <string name="model_missing_body">Oko 30 MB po jeziku. Kada se preuzme, prevođenje radi i bez interneta.</string>
+    <string name="download_model">Preuzmi model</string>
+    <string name="working">U toku…</string>
+    <string name="model_ready">Model je spreman</string>
+    <string name="url_label">Link ka članku</string>
+    <string name="open_reader">Otvori u dvojezičnom čitaču</string>
+    <string name="paste_label">Ili nalepite tekst ovde</string>
+    <string name="read_this_text">Pročitaj ovaj tekst</string>
+    <string name="translate_anywhere">Prevodite bilo gde</string>
+    <string name="howto_body">1. Označite tekst u aplikaciji Chrome, Discord ili WhatsApp i izaberite LanguaLens iz menija.\n2. Ili uključite plutajuće dugme i dodirnite ga da biste preveli ceo ekran.</string>
+    <string name="perm_overlay">Prikaz preko drugih aplikacija</string>
+    <string name="perm_accessibility">Pristupačnost: LanguaLens čitač ekrana</string>
+    <string name="turn_on">Uključi</string>
+    <string name="bubble_on">Dugme uključeno</string>
+    <string name="bubble_off">Dugme isključeno</string>
+
+    <!-- words screen -->
+    <string name="search_hint">Pretraga (%1$d sačuvano)</string>
+    <string name="speak">Izgovori</string>
+    <string name="delete">Obriši</string>
+    <string name="nothing_saved">Još ništa nije sačuvano</string>
+
+    <!-- practice screen -->
+    <string name="practice_title">Vežbanje</string>
+    <string name="loading">Učitavanje…</string>
+    <string name="nothing_due">Trenutno nema ničega za ponavljanje.</string>
+    <string name="reload">Učitaj ponovo</string>
+    <string name="show_answer">Prikaži odgovor</string>
+    <string name="grade_again">Ponovo</string>
+    <string name="grade_hard">Teško</string>
+    <string name="grade_good">Dobro</string>
+    <string name="grade_easy">Lako</string>
+    <string name="card_progress">%1$d / %2$d</string>
+
+    <!-- settings screen -->
+    <string name="settings_title">Podešavanja</string>
+    <string name="section_reading">Čitanje</string>
+    <string name="mode_paragraph">Prevodi po pasusu (isključeno = po rečenici)</string>
+    <string name="hide_translation">Sakrij prevod dok se ne dodirne</string>
+    <string name="auto_translate">Automatski prevedi kada se stranica otvori</string>
+    <string name="interface_language">Jezik aplikacije</string>
+    <string name="section_anki">Anki</string>
+    <string name="anki_found">AnkiDroid je pronađen na ovom uređaju.</string>
+    <string name="anki_missing">AnkiDroid nije pronađen. Izvoz u datoteku i dalje radi.</string>
+    <string name="anki_deck">Špil</string>
+    <string name="anki_model">Tip beleške (obično Basic)</string>
+    <string name="anki_auto_push">Šalji nove stavke direktno u AnkiDroid</string>
+    <string name="anki_push">Pošalji u Anki</string>
+    <string name="export">Izvezi</string>
+    <string name="section_models">Oflajn modeli</string>
+    <string name="download">Preuzmi</string>
+    <string name="remove">Ukloni</string>
+    <string name="downloaded_models">Preuzeto: %1$s</string>
+    <string name="none">nijedan</string>
+
+    <!-- reader toolbar -->
+    <string name="reader_mode_paragraph">PASUS</string>
+    <string name="reader_mode_sentence">REČENICA</string>
+    <string name="reader_show">PRIKAŽI</string>
+    <string name="reader_hidden">SKRIVENO</string>
+    <string name="reader_translate">PREVEDI</string>
+    <string name="reader_tap_hint">dodirnite za prikaz</string>
+    <string name="reader_placeholder">Nalepite tekst ili otvorite link pomoću aplikacije LanguaLens.</string>
+    <string name="reader_missing_script">reader.js nedostaje</string>
+    <string name="text_label">Tekst</string>
+
+    <!-- quick popup -->
+    <string name="translating">Prevođenje…</string>
+    <string name="save">Sačuvaj</string>
+    <string name="read">Čitaj</string>
+    <string name="no_translation">Nema prevoda. Otvorite LanguaLens i preuzmite oflajn model.</string>
+
+    <!-- bubble panel -->
+    <string name="bubble_channel">LanguaLens mehurić</string>
+    <string name="bubble_running">Plutajuće dugme za prevođenje je aktivno</string>
+    <string name="stop">Zaustavi</string>
+    <string name="screen_translated">Ekran preveden (%1$d)</string>
+    <string name="refresh">Osveži</string>
+    <string name="close">Zatvori</string>
+    <string name="tap_row_hint">Dodirnite red da biste ga sačuvali za Anki</string>
+    <string name="no_text_found">Nije pronađen tekst na ekranu</string>
+    <string name="enable_accessibility_first">Prvo uključite LanguaLens čitač ekrana u odeljku Pristupačnost</string>
+    <string name="overlay_missing">Nedostaje dozvola za prikaz preko drugih aplikacija</string>
+
+    <!-- results and toasts -->
+    <string name="saved_item">Sačuvano: %1$s</string>
+    <string name="already_saved">Već je sačuvano</string>
+    <string name="nothing_to_save">Nema šta da se sačuva</string>
+    <string name="anki_not_found">AnkiDroid nije pronađen na ovom uređaju</string>
+    <string name="anki_nothing_new">Nema ničega novog za slanje</string>
+    <string name="anki_pushed">Poslato %1$d kartica u AnkiDroid</string>
+    <string name="anki_partial">Poslato %1$d, neuspešno %2$d</string>
+    <string name="model_deleted">Model je uklonjen</string>
+    <string name="action_failed">Neuspešno</string>
+    <string name="same_language">Izvorni i ciljni jezik su isti</string>
+    <string name="export_title">Izvezi rečnik</string>
+</resources>

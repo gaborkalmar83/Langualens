@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">LanguaLens</string>
+    <string name="reader_title">LanguaLens Reader</string>
+    <string name="process_text_label">LanguaLens</string>
+    <string name="accessibility_label">LanguaLens читач на екран</string>
+    <string name="accessibility_description">Му овозможува на LanguaLens да го чита текстот прикажан на екранот за да ги покаже преводите во лебдечкиот панел. Текстот се преведува на самиот уред и никогаш не се прикачува на интернет.</string>
+
+    <!-- navigation -->
+    <string name="tab_read">Читање</string>
+    <string name="tab_words">Зборови</string>
+    <string name="tab_practice">Вежбање</string>
+    <string name="tab_settings">Поставки</string>
+
+    <!-- read screen -->
+    <string name="read_subtitle">Читајте на еден јазик, со друг под него.</string>
+    <string name="from_language">Од</string>
+    <string name="to_language">На</string>
+    <string name="swap_languages">Замени</string>
+    <string name="model_missing_title">Офлајн моделот сè уште не е преземен</string>
+    <string name="model_missing_body">Околу 30 MB по јазик. Откако ќе се преземе, преводот работи и без интернет.</string>
+    <string name="download_model">Преземи модел</string>
+    <string name="working">Се обработува…</string>
+    <string name="model_ready">Моделот е подготвен</string>
+    <string name="url_label">Линк до статијата</string>
+    <string name="open_reader">Отвори во двојазичен читач</string>
+    <string name="paste_label">Или залепете текст овде</string>
+    <string name="read_this_text">Прочитај го овој текст</string>
+    <string name="translate_anywhere">Преведувајте насекаде</string>
+    <string name="howto_body">1. Означете текст во Chrome, Discord или WhatsApp и изберете LanguaLens од менито.\n2. Или вклучете го лебдечкото копче и допрете го за да го преведете целиот екран.</string>
+    <string name="perm_overlay">Прикажување врз други апликации</string>
+    <string name="perm_accessibility">Пристапност: LanguaLens читач на екран</string>
+    <string name="turn_on">Вклучи</string>
+    <string name="bubble_on">Копчето е вклучено</string>
+    <string name="bubble_off">Копчето е исклучено</string>
+
+    <!-- words screen -->
+    <string name="search_hint">Пребарување (%1$d зачувани)</string>
+    <string name="speak">Изговори</string>
+    <string name="delete">Избриши</string>
+    <string name="nothing_saved">Сè уште нема ништо зачувано</string>
+
+    <!-- practice screen -->
+    <string name="practice_title">Вежбање</string>
+    <string name="loading">Се вчитува…</string>
+    <string name="nothing_due">Моментално нема ништо за повторување.</string>
+    <string name="reload">Вчитај повторно</string>
+    <string name="show_answer">Покажи одговор</string>
+    <string name="grade_again">Повторно</string>
+    <string name="grade_hard">Тешко</string>
+    <string name="grade_good">Добро</string>
+    <string name="grade_easy">Лесно</string>
+    <string name="card_progress">%1$d / %2$d</string>
+
+    <!-- settings screen -->
+    <string name="settings_title">Поставки</string>
+    <string name="section_reading">Читање</string>
+    <string name="mode_paragraph">Преведувај по пасус (исклучено = по реченица)</string>
+    <string name="hide_translation">Скриј го преводот додека не се допре</string>
+    <string name="auto_translate">Преведувај автоматски кога ќе се отвори страница</string>
+    <string name="interface_language">Јазик на апликацијата</string>
+    <string name="section_anki">Anki</string>
+    <string name="anki_found">AnkiDroid е пронајден на овој уред.</string>
+    <string name="anki_missing">AnkiDroid не е пронајден. Извозот во датотека сепак работи.</string>
+    <string name="anki_deck">Шпил</string>
+    <string name="anki_model">Тип на белешка (обично Basic)</string>
+    <string name="anki_auto_push">Испраќај ги новите ставки директно во AnkiDroid</string>
+    <string name="anki_push">Испрати во Anki</string>
+    <string name="export">Извези</string>
+    <string name="section_models">Офлајн модели</string>
+    <string name="download">Преземи</string>
+    <string name="remove">Отстрани</string>
+    <string name="downloaded_models">Преземени: %1$s</string>
+    <string name="none">нема</string>
+
+    <!-- reader toolbar -->
+    <string name="reader_mode_paragraph">ПАСУС</string>
+    <string name="reader_mode_sentence">РЕЧЕНИЦА</string>
+    <string name="reader_show">ПРИКАЖИ</string>
+    <string name="reader_hidden">СКРИЕНО</string>
+    <string name="reader_translate">ПРЕВЕДИ</string>
+    <string name="reader_tap_hint">допрете за приказ</string>
+    <string name="reader_placeholder">Залепете текст или отворете линк со LanguaLens.</string>
+    <string name="reader_missing_script">reader.js недостасува</string>
+    <string name="text_label">Текст</string>
+
+    <!-- quick popup -->
+    <string name="translating">Се преведува…</string>
+    <string name="save">Зачувај</string>
+    <string name="read">Читај</string>
+    <string name="no_translation">Нема превод. Отворете го LanguaLens и преземете го офлајн моделот.</string>
+
+    <!-- bubble panel -->
+    <string name="bubble_channel">LanguaLens меурче</string>
+    <string name="bubble_running">Лебдечкото копче за преведување е активно</string>
+    <string name="stop">Запри</string>
+    <string name="screen_translated">Екранот е преведен (%1$d)</string>
+    <string name="refresh">Освежи</string>
+    <string name="close">Затвори</string>
+    <string name="tap_row_hint">Допрете ред за да го зачувате за Anki</string>
+    <string name="no_text_found">Не е пронајден текст на екранот</string>
+    <string name="enable_accessibility_first">Прво вклучете го LanguaLens читачот на екран во Пристапност</string>
+    <string name="overlay_missing">Недостасува дозвола за прикажување врз други апликации</string>
+
+    <!-- results and toasts -->
+    <string name="saved_item">Зачувано: %1$s</string>
+    <string name="already_saved">Веќе е зачувано</string>
+    <string name="nothing_to_save">Нема што да се зачува</string>
+    <string name="anki_not_found">AnkiDroid не е пронајден на овој уред</string>
+    <string name="anki_nothing_new">Нема ништо ново за испраќање</string>
+    <string name="anki_pushed">Испратени се %1$d картички во AnkiDroid</string>
+    <string name="anki_partial">Испратени %1$d, неуспешни %2$d</string>
+    <string name="model_deleted">Моделот е отстранет</string>
+    <string name="action_failed">Неуспешно</string>
+    <string name="same_language">Изворниот и целниот јазик се исти</string>
+    <string name="export_title">Извези вокабулар</string>
+</resources>

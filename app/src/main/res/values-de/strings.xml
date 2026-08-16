@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">LanguaLens</string>
+    <string name="reader_title">LanguaLens Reader</string>
+    <string name="process_text_label">LanguaLens</string>
+    <string name="accessibility_label">LanguaLens Bildschirmleser</string>
+    <string name="accessibility_description">Erlaubt LanguaLens, den auf dem Bildschirm angezeigten Text zu lesen, um Übersetzungen im schwebenden Fenster anzuzeigen. Der Text wird auf dem Gerät übersetzt und niemals hochgeladen.</string>
+
+    <!-- navigation -->
+    <string name="tab_read">Lesen</string>
+    <string name="tab_words">Wörter</string>
+    <string name="tab_practice">Üben</string>
+    <string name="tab_settings">Einstellungen</string>
+
+    <!-- read screen -->
+    <string name="read_subtitle">In einer Sprache lesen, mit der anderen darunter.</string>
+    <string name="from_language">Von</string>
+    <string name="to_language">Nach</string>
+    <string name="swap_languages">Tauschen</string>
+    <string name="model_missing_title">Offline-Modell noch nicht heruntergeladen</string>
+    <string name="model_missing_body">Etwa 30 MB pro Sprache. Nach dem Download funktioniert die Übersetzung ohne Internet.</string>
+    <string name="download_model">Modell herunterladen</string>
+    <string name="working">Wird bearbeitet…</string>
+    <string name="model_ready">Modell bereit</string>
+    <string name="url_label">Artikel-Link</string>
+    <string name="open_reader">Im zweisprachigen Reader öffnen</string>
+    <string name="paste_label">Oder Text hier einfügen</string>
+    <string name="read_this_text">Diesen Text lesen</string>
+    <string name="translate_anywhere">Überall übersetzen</string>
+    <string name="howto_body">1. Text in Chrome, Discord oder WhatsApp markieren und im Menü LanguaLens auswählen.\n2. Oder die schwebende Schaltfläche aktivieren und darauf tippen, um den ganzen Bildschirm zu übersetzen.</string>
+    <string name="perm_overlay">Über anderen Apps anzeigen</string>
+    <string name="perm_accessibility">Bedienungshilfen: LanguaLens Bildschirmleser</string>
+    <string name="turn_on">Aktivieren</string>
+    <string name="bubble_on">Button an</string>
+    <string name="bubble_off">Button aus</string>
+
+    <!-- words screen -->
+    <string name="search_hint">Suchen (%1$d gespeichert)</string>
+    <string name="speak">Vorlesen</string>
+    <string name="delete">Löschen</string>
+    <string name="nothing_saved">Noch nichts gespeichert</string>
+
+    <!-- practice screen -->
+    <string name="practice_title">Üben</string>
+    <string name="loading">Wird geladen…</string>
+    <string name="nothing_due">Momentan nichts zu wiederholen.</string>
+    <string name="reload">Neu laden</string>
+    <string name="show_answer">Antwort zeigen</string>
+    <string name="grade_again">Nochmal</string>
+    <string name="grade_hard">Schwer</string>
+    <string name="grade_good">Gut</string>
+    <string name="grade_easy">Leicht</string>
+    <string name="card_progress">%1$d / %2$d</string>
+
+    <!-- settings screen -->
+    <string name="settings_title">Einstellungen</string>
+    <string name="section_reading">Lesen</string>
+    <string name="mode_paragraph">Absatzweise übersetzen (aus = satzweise)</string>
+    <string name="hide_translation">Übersetzung erst beim Tippen anzeigen</string>
+    <string name="auto_translate">Automatisch übersetzen, wenn eine Seite geöffnet wird</string>
+    <string name="interface_language">App-Sprache</string>
+    <string name="section_anki">Anki</string>
+    <string name="anki_found">AnkiDroid auf diesem Gerät gefunden.</string>
+    <string name="anki_missing">AnkiDroid nicht gefunden. Der Export als Datei funktioniert weiterhin.</string>
+    <string name="anki_deck">Stapel</string>
+    <string name="anki_model">Notiztyp (meist Basic)</string>
+    <string name="anki_auto_push">Neue Einträge direkt an AnkiDroid senden</string>
+    <string name="anki_push">An Anki senden</string>
+    <string name="export">Exportieren</string>
+    <string name="section_models">Offline-Modelle</string>
+    <string name="download">Herunterladen</string>
+    <string name="remove">Entfernen</string>
+    <string name="downloaded_models">Heruntergeladen: %1$s</string>
+    <string name="none">keine</string>
+
+    <!-- reader toolbar -->
+    <string name="reader_mode_paragraph">ABSATZ</string>
+    <string name="reader_mode_sentence">SATZ</string>
+    <string name="reader_show">ZEIGEN</string>
+    <string name="reader_hidden">VERBORGEN</string>
+    <string name="reader_translate">ÜBERS.</string>
+    <string name="reader_tap_hint">zum Anzeigen tippen</string>
+    <string name="reader_placeholder">Text einfügen oder einen Link mit LanguaLens öffnen.</string>
+    <string name="reader_missing_script">reader.js fehlt</string>
+    <string name="text_label">Text</string>
+
+    <!-- quick popup -->
+    <string name="translating">Wird übersetzt…</string>
+    <string name="save">Speichern</string>
+    <string name="read">Lesen</string>
+    <string name="no_translation">Keine Übersetzung. LanguaLens öffnen und das Offline-Modell herunterladen.</string>
+
+    <!-- bubble panel -->
+    <string name="bubble_channel">LanguaLens-Bubble</string>
+    <string name="bubble_running">Schwebende Übersetzen-Schaltfläche ist aktiv</string>
+    <string name="stop">Stoppen</string>
+    <string name="screen_translated">Bildschirm übersetzt (%1$d)</string>
+    <string name="refresh">Aktualisieren</string>
+    <string name="close">Schließen</string>
+    <string name="tap_row_hint">Auf eine Zeile tippen, um sie für Anki zu speichern</string>
+    <string name="no_text_found">Kein Text auf dem Bildschirm gefunden</string>
+    <string name="enable_accessibility_first">Zuerst den LanguaLens Bildschirmleser unter Bedienungshilfen aktivieren</string>
+    <string name="overlay_missing">Berechtigung zum Anzeigen über anderen Apps fehlt</string>
+
+    <!-- results and toasts -->
+    <string name="saved_item">Gespeichert: %1$s</string>
+    <string name="already_saved">Bereits gespeichert</string>
+    <string name="nothing_to_save">Nichts zu speichern</string>
+    <string name="anki_not_found">AnkiDroid auf diesem Gerät nicht gefunden</string>
+    <string name="anki_nothing_new">Nichts Neues zu senden</string>
+    <string name="anki_pushed">%1$d Karten an AnkiDroid gesendet</string>
+    <string name="anki_partial">%1$d gesendet, %2$d fehlgeschlagen</string>
+    <string name="model_deleted">Modell entfernt</string>
+    <string name="action_failed">Fehlgeschlagen</string>
+    <string name="same_language">Quell- und Zielsprache sind identisch</string>
+    <string name="export_title">Wortschatz exportieren</string>
+</resources>

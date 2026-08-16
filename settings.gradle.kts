@@ -20,5 +20,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "LinguaLens"
+rootProject.name = "LanguaLens"
 include(":app")
