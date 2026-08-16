@@ -26,6 +26,15 @@
             android:textStyle="bold" />
 
         <Button
+            android:id="@+id/btnReader"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#7FB2FF"
+            android:textSize="12sp"
+            android:text="@string/send_to_reader" />
+
+        <Button
             android:id="@+id/btnRescan"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"

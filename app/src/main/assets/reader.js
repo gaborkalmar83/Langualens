@@ -17,6 +17,13 @@
   var HIDDEN = !!window.__llHidden;
   var HINT = window.__llHint || 'tap to reveal';
 
+  /* How long the translation popup stays on screen, how long to wait for a
+   * selection to settle before translating it, and the longest selection that
+   * is translated automatically. */
+  var POPUP_MS = 3000;
+  var AUTO_LOOKUP_DELAY_MS = 400;
+  var AUTO_LOOKUP_MAX = 400;
+
   var SKIP_TAGS = {
     SCRIPT: 1, STYLE: 1, NOSCRIPT: 1, CODE: 1, PRE: 1, TEXTAREA: 1,
     SELECT: 1, OPTION: 1, IFRAME: 1, SVG: 1, CANVAS: 1, INPUT: 1,
@@ -60,7 +67,13 @@
     'font-size:14px;font-weight:600;background:#2f6fe4;color:#fff;}' +
     '#ll-bar button.sec{background:#2c3446;color:#dbe4f5;}' +
     '#ll-progress{position:fixed;top:0;left:0;height:3px;width:0;' +
-    'background:#2f6fe4;z-index:2147483647;transition:width .25s ease,opacity .4s ease;}';
+    'background:#2f6fe4;z-index:2147483647;transition:width .25s ease,opacity .4s ease;}' +
+    '#ll-pop{position:fixed;left:12px;right:12px;bottom:76px;z-index:2147483647;' +
+    'display:none;opacity:0;padding:16px 18px;border-radius:14px;' +
+    'background:rgba(20,24,33,.97);color:#fff;line-height:1.35;text-align:center;' +
+    'font-family:-apple-system,Roboto,sans-serif;font-weight:500;' +
+    'max-height:42vh;overflow:auto;box-shadow:0 4px 24px rgba(0,0,0,.45);' +
+    'transition:opacity .3s ease;-webkit-user-select:none;user-select:none;}';
   (document.head || document.documentElement).appendChild(style);
 
   var progress = document.createElement('div');
@@ -76,13 +89,71 @@
     '<button id="ll-say" class="sec">&#9835;</button>';
   document.documentElement.appendChild(bar);
 
+  /* ------------------------- translation popup ------------------------- */
+  /* The selection bar keeps offering save / translate / speak, but the
+   * translation itself fires on its own so the common case needs no tap.
+   * The result is shown at 1.5x the page's body text size for 3 seconds. */
+  var pop = document.createElement('div');
+  pop.id = 'll-pop';
+  document.documentElement.appendChild(pop);
+
+  var popHide = null;
+  var popClear = null;
+
+  window.llPopup = function (text) {
+    if (!text) { return; }
+    var base = parseFloat(window.getComputedStyle(document.body).fontSize) || 18;
+    pop.style.fontSize = (base * 1.5) + 'px';
+    pop.textContent = text;
+    pop.style.display = 'block';
+    /* Force a reflow so the opacity transition runs on a re-show. */
+    void pop.offsetWidth;
+    pop.style.opacity = '1';
+
+    if (popHide) { clearTimeout(popHide); }
+    if (popClear) { clearTimeout(popClear); }
+    popHide = setTimeout(function () {
+      pop.style.opacity = '0';
+      popClear = setTimeout(function () { pop.style.display = 'none'; }, 320);
+    }, POPUP_MS);
+  };
+
+  pop.addEventListener('click', function () {
+    if (popHide) { clearTimeout(popHide); }
+    if (popClear) { clearTimeout(popClear); }
+    pop.style.opacity = '0';
+    setTimeout(function () { pop.style.display = 'none'; }, 320);
+  });
+
   function selectedText() {
     var s = window.getSelection();
     return s ? String(s).trim() : '';
   }
 
+  function requestLookup(text) {
+    if (!text) { return; }
+    try { LanguaLens.lookup(text); } catch (e) { /* bridge not attached */ }
+  }
+
+  var lastLookup = '';
+  var selTimer = null;
+
   document.addEventListener('selectionchange', function () {
-    bar.style.display = selectedText().length > 0 ? 'flex' : 'none';
+    var text = selectedText();
+    bar.style.display = text.length > 0 ? 'flex' : 'none';
+
+    if (selTimer) { clearTimeout(selTimer); selTimer = null; }
+    if (!text) { lastLookup = ''; return; }
+
+    /* Debounced so it fires once the drag handle settles, not on every
+     * intermediate selection. Long passages are left to the button, because
+     * translating a whole screen of text does not fit in a popup. */
+    selTimer = setTimeout(function () {
+      var current = selectedText();
+      if (!current || current.length > AUTO_LOOKUP_MAX || current === lastLookup) { return; }
+      lastLookup = current;
+      requestLookup(current);
+    }, AUTO_LOOKUP_DELAY_MS);
   });
 
   bar.addEventListener('mousedown', function (e) { e.preventDefault(); });
@@ -95,9 +166,11 @@
     var s = window.getSelection(); if (s) { s.removeAllRanges(); }
   });
 
+  /* Still available explicitly, for selections too long to fire on their own
+   * and to re-show a popup that has already faded. */
   document.getElementById('ll-look').addEventListener('click', function () {
     var t = selectedText();
-    if (t) { LanguaLens.lookup(t); }
+    if (t) { lastLookup = t; requestLookup(t); }
   });
 
   document.getElementById('ll-say').addEventListener('click', function () {

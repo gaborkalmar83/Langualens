@@ -221,13 +221,19 @@ class ReaderActivity : ComponentActivity() {
             }
         }
 
+        /**
+         * Translates the current selection and shows it inside the page as a large
+         * transient popup, rather than a toast, so the result is readable at a
+         * glance without covering the selection bar.
+         */
         @JavascriptInterface
         fun lookup(text: String) {
             lifecycleScope.launch {
                 val translated = Translate.translate(text)
-                toast(
+                val message =
                     if (translated.isBlank()) getString(R.string.no_translation) else translated
-                )
+                val literal = JSONObject.quote(message)
+                web.evaluateJavascript("if(window.llPopup)window.llPopup($literal);", null)
             }
         }
 
@@ -265,6 +271,20 @@ class ReaderActivity : ComponentActivity() {
         fun openText(activity: Activity, text: String) {
             activity.startActivity(
                 Intent(activity, ReaderActivity::class.java).putExtra(EXTRA_TEXT, text)
+            )
+        }
+
+        /**
+         * Same as [openText] but callable from a Service, which has no task of its
+         * own to launch into. Used by the floating panel's "Reader" button.
+         */
+        fun openTextFrom(context: Context, text: String) {
+            context.startActivity(
+                Intent(context, ReaderActivity::class.java)
+                    .putExtra(EXTRA_TEXT, text)
+                    .addFlags(
+                        Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                    )
             )
         }
     }

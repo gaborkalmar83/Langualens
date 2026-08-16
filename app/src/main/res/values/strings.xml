@@ -72,6 +72,8 @@
     <string name="remove">Remove</string>
     <string name="downloaded_models">Downloaded: %1$s</string>
     <string name="none">none</string>
+    <string name="section_privacy">Where your text goes</string>
+    <string name="privacy_body">Translation runs on this device with Google ML Kit. The text you select, the pages you read and your saved words are translated locally and are never sent to a translation server.\n\nThree things do use the network, and only these:\n\n1. Downloading a language model, once per language, from Google servers. Only the model is transferred, never your text.\n2. Opening a link in the reader, which loads that website exactly like a browser would, so the site sees a normal visit.\n3. Speaking text aloud, which hands it to the text-to-speech engine you have installed. Some engines process speech in the cloud. Check your engine under Android Settings if that matters to you.\n\nThe screen reader only reads the screen at the moment you tap the bubble, never in the background. Saved words stay in a database on this device unless you export them or send them to AnkiDroid. There are no accounts, no analytics and no advertising.</string>
 
     <!-- reader toolbar -->
     <string name="reader_mode_paragraph">PARA</string>
@@ -97,6 +99,7 @@
     <string name="screen_translated">Screen translated (%1$d)</string>
     <string name="refresh">Refresh</string>
     <string name="close">Close</string>
+    <string name="send_to_reader">Reader</string>
     <string name="tap_row_hint">Tap a line to save it for Anki</string>
     <string name="no_text_found">No text found on screen</string>
     <string name="enable_accessibility_first">First turn on the LanguaLens screen reader under Accessibility</string>

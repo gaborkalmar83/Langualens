@@ -28,6 +28,7 @@ import com.langualens.app.data.Prefs
 import com.langualens.app.data.Repo
 import com.langualens.app.translate.Translate
 import com.langualens.app.ui.MainActivity
+import com.langualens.app.ui.ReaderActivity
 import com.langualens.app.util.LocaleHelper
 import com.langualens.app.util.Speaker
 import kotlinx.coroutines.CoroutineScope
@@ -219,6 +220,10 @@ class BubbleService : Service() {
             val fresh = ScreenReaderService.instance?.readScreen().orEmpty()
             hidePanel()
             if (fresh.isNotEmpty()) showPanel(fresh)
+        }
+        view.findViewById<Button>(R.id.btnReader).setOnClickListener {
+            hidePanel()
+            ReaderActivity.openTextFrom(this, lines.joinToString("\n\n"))
         }
 
         try {

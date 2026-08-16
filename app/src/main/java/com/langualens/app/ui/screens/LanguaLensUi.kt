@@ -781,6 +781,14 @@ private fun SettingsScreen(
             ) { Text(stringResource(R.string.remove)) }
         }
 
+        Divider()
+        Text(
+            stringResource(R.string.section_privacy),
+            fontWeight = FontWeight.SemiBold,
+            fontSize = 16.sp
+        )
+        Text(stringResource(R.string.privacy_body), fontSize = 13.sp)
+
         Spacer(Modifier.height(24.dp))
     }
 }
