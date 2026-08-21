@@ -6,12 +6,12 @@ and save anything you highlight into AnkiDroid.
 Everything translates **on device**. Nothing you read or select is sent to a
 translation server. No API keys, no accounts, no tracking.
 
-This repository holds two things:
+The Android app lives here; the browser version has its own repository:
 
 | | |
 |---|---|
 | [`app/`](app) | The Android app. Translates with Google ML Kit. |
-| [`extension/`](extension) | The Chrome extension. Same features, translates with Chrome's built-in translator. |
+| [`langualens-extension`](https://github.com/gaborkalmar83/langualens-extension) | The Chrome extension, in its own repository. Same features, translates with Chrome's built-in translator. |
 
 ---
 
@@ -216,69 +216,14 @@ File → Import, set the field separator to Tab, and allow HTML in fields.
 
 ## The Chrome extension
 
-Same idea, in the browser: translations underneath each paragraph, a selection bar
-with save / translate / speak, and the same automatic popup at 1.5x size for three
-seconds when you select something.
+The browser version lives in its own repository: **[langualens-extension](https://github.com/gaborkalmar83/langualens-extension)**.
 
-### Requirements
+Same idea in Chrome — translations underneath each paragraph, the selection bar, the
+same automatic popup, and the direction flip on pages already written in your target
+language. It translates with Chrome's built-in on-device translator rather than
+ML Kit, and needs Chrome 138 or newer.
 
-Chrome **138 or newer**, which is the first version with the built-in on-device
-`Translator` API. The extension checks this and tells you in the popup if your Chrome
-is too old. There is deliberately no cloud fallback — falling back to a web API would
-break the promise that your text stays local.
-
-### Installing
-
-The extension is not on the Chrome Web Store, so load it unpacked:
-
-1. Open `chrome://extensions`
-2. Turn on **Developer mode**, top right
-3. Click **Load unpacked**
-4. Select the [`extension/`](extension) folder from this repository
-
-*Why developer mode:* it is what Chrome requires to run an extension that did not
-come from the Web Store. Nothing about the extension needs it beyond installation.
-
-### Using it
-
-1. Click the LanguaLens icon, pick **From** and **To**.
-2. If it says the model is not downloaded, click **Download model**. Chrome requires
-   a click before it will fetch a model, which is what that button is for.
-3. Click **Translate this page**, or press **Alt+L**, or right-click the page and
-   choose **Translate this page with LanguaLens**.
-4. Select any text to get the three buttons and the automatic popup. Right-click a
-   selection for **Translate with LanguaLens**.
-5. Saved words are listed in the popup. **Export for Anki** gives you the same tab
-   separated file the Android app produces.
-
-The options in the popup mirror the app: per-sentence mode, hide-until-clicked,
-automatic translation of selections, and automatic translation of every page.
-
-### Pages already in your target language
-
-If you are learning Dutch and read with **From: Dutch, To: English**, an English
-page is the one you want turned *into* Dutch — leaving it alone would be useless.
-So when a page is already written in the To language, LanguaLens flips the pair for
-that page and tells you it did, in a small notice at the bottom.
-
-It decides from the page's own `lang` attribute, falling back to Chrome's on-device
-language detector when the page does not declare one. The flip applies to the whole
-page, to selections and to what gets saved, so a word saved from an English page is
-stored as English to Dutch.
-
-This is the **Flip the direction on pages already in the To language** checkbox, on
-by default. Turn it off to always translate in one fixed direction. Note that with
-it on, both directions get used, so Chrome downloads two models rather than one —
-the popup says so and the Download button fetches both.
-
-### Permissions the extension asks for, and why
-
-| Permission | Why |
-|---|---|
-| `storage` | Keeps your language pair, your options and your saved words in local extension storage. |
-| `contextMenus` | The two right-click entries. |
-| `activeTab`, `scripting` | Lets the popup tell the current tab to run a translation pass. |
-| `host_permissions` for http/https | The reader has to be able to run on the page you are reading. It reads and annotates the page in place; it sends nothing anywhere. |
+Installation, usage and the privacy notes are in that repository's README.
 
 ---
 
